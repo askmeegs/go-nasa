@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: marstoday
+spec:
+  selector:
+    matchLabels:
+      app: marstoday
+  template:
+    metadata:
+      labels:
+        app: marstoday
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+      - name: server
+        image: gcr.io/megan-fall20/marstoday:latest
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: nasa-api-key
+          mountPath: "/tmp/nasa-api-key"
+          readOnly: true
+        # env:
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+      volumes:
+      - name: nasa-api-key
+        secret:
+          secretName: nasa-api-key
+          items:
+          - key: apikey
+            path: nasa-api-key

@@ -1,0 +1,22 @@
+
+  <div>
+    <h1>What's it like on Mars?</h1>
+    <h4>Earth date: {{.WeatherConditions.EarthDate}}</h4>
+    <div>
+      <h3>Season: {{.WeatherConditions.Season}}</h3>
+      <h3>Max Temperature: {{.WeatherConditions.Temp.MaxTemp}}°C</h3>
+      <h3>Min Temperature: {{.WeatherConditions.Temp.MinTemp}}°C</h3>
+      <h3>Avg. Wind Speed: {{.WeatherConditions.WindSpeed.Average}} m/s</h3>
+      <h3>Avg. Pressure: {{.WeatherConditions.Pressure.Average}} Pascals</h3>
+    </div>
+
+    <div>
+      <h2>Gallery</h2>
+
+      {{range .Photos}}
+      <img src="{{.Source}}" alt="img">
+      <p>From the <strong>{{.Rover.Name}} - {{.Date}} </strong></p>
+      {{end}}
+
+    </div>
+  </div>
